@@ -39,10 +39,11 @@ const Home = () => {
     }
     setPokemon(newPoke);
     setLoading(false);
+    SortThemByID(!sortById);
   };
 
-  const SortThemByID = () => {
-    if (!sortById) {
+  const SortThemByID = (sorting = sortById) => {
+    if (!sorting) {
       setPokemon((currPokemnons) =>
         currPokemnons.sort((a, b) => {
           let keyA = a.id,
@@ -67,13 +68,13 @@ const Home = () => {
 
   useEffect(() => {
     getPokemonsById();
-    SortThemByID();
+    SortThemByID(sortById);
   }, [newCardsIndex]);
 
   useEffect(() => {
     console.log(sortById);
     // console.log(pokemons);
-    SortThemByID();
+    SortThemByID(sortById);
   }, [sortById, pokemons]);
 
   return (
@@ -132,7 +133,6 @@ const Home = () => {
           disabled={newCardsIndex <= 0}
           className={`BTN-FOOTER`}
           onClick={() => {
-            setSortById(true);
             setNewCardsindex((curr) => curr - 12);
           }}
         >
@@ -141,7 +141,6 @@ const Home = () => {
         <button
           className={`BTN-FOOTER`}
           onClick={() => {
-            setSortById(true);
             setNewCardsindex((curr) => curr + 12);
           }}
         >
