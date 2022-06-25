@@ -19,7 +19,7 @@ const Home = () => {
           //   setPokemon(res.data.results);
           newPoke[i] = {
             name: res.data.name,
-            url: res.data.sprites.back_default,
+            url: res.data.sprites.front_default,
           };
         })
         .catch((err) => {
