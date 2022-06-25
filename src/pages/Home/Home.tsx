@@ -41,12 +41,38 @@ const Home = () => {
     setLoading(false);
   };
 
+  const SortThemByID = () => {
+    if (!sortById) {
+      setPokemon((currPokemnons) =>
+        currPokemnons.sort((a, b) => {
+          let keyA = a.id,
+            keyB = b.id;
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        })
+      );
+    } else {
+      setPokemon((currPokemons) =>
+        currPokemons.sort((a, b) => {
+          let keyA = a.name,
+            keyB = b.name;
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     getPokemonsById();
   }, [newCardsIndex]);
 
   useEffect(() => {
     console.log(sortById);
+    // console.log(pokemons);
+    SortThemByID();
   }, [sortById]);
 
   return (
@@ -64,7 +90,7 @@ const Home = () => {
                 onChange={() => {
                   setSortById(false);
                 }}
-              />{" "}
+              />
               Sort Name
               <input
                 type="radio"
@@ -74,7 +100,7 @@ const Home = () => {
                 onChange={() => {
                   setSortById(true);
                 }}
-              />{" "}
+              />
               Sort ID
             </label>
           </div>
