@@ -81,7 +81,7 @@ const Home = () => {
     <div className="h-screen w-screen flex flex-col justify-between gap-8 p-[3rem] bg-[#F6F6F7]">
       <div className="flex flex-col gap-4">
         <div className="w-full h-[3rem] flex flex-row justify-between items-start">
-          <div className="flex text-[32px]">All Pokemon!</div>
+          <div className="flex text-[32px]">All the Pokemon!</div>
           <div className="flex gap-4">
             <label className="flex gap-4 justify-center items-center">
               <input
