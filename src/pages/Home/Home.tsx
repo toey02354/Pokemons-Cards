@@ -80,7 +80,7 @@ const Home = () => {
   return (
     <div className="h-screen w-screen flex flex-col justify-between gap-8 p-[3rem] bg-[#F6F6F7]">
       <div className="flex flex-col gap-4">
-        <div className="w-full h-[3rem] flex flex-row justify-between items-start">
+        <div className="w-full h-[3rem] flex flex-row justify-between items-center">
           <div className="flex text-[32px]">All the Pokemon!</div>
           <div className="flex gap-4">
             <label className="flex gap-4 justify-center items-center">
@@ -118,7 +118,7 @@ const Home = () => {
                   <img
                     height={72}
                     width={72}
-                    className="bg-gray-300 rounded-full"
+                    className="bg-[#E3E1E5] rounded-full"
                     src={pokeCard.url}
                   ></img>
                   <div className="text-[1rem]">
