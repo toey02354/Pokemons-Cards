@@ -15,3 +15,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@layer components {
+  .BTN-FOOTER {
+    @apply border-[1px] p-2 rounded-[4px] font-[#024E74] border-[#024E74];
+  }
+}
