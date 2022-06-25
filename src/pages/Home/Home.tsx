@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+interface Pokemons {
+  name: string;
+  url: string;
+}
+
 const Home = () => {
+  const [pokemons, setPokemon] = useState<Pokemons[]>([{ name: "", url: "" }]);
+
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon/ditto")
+      .get("https://pokeapi.co/api/v2/pokemon/")
       .then((res) => {
         console.log(res.data);
+        setPokemon(res.data.results);
       })
       .catch((err) => {
         console.log(err);
@@ -26,9 +34,12 @@ const Home = () => {
           </label>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-4 bg-red-300">
-        {pokemonCards.map((pokeCard, index) => (
-          <div className="bg-white">{pokeCard}</div>
+      <div className="grid grid-cols-4 gap-4 ">
+        {pokemons.map((pokeCard, index) => (
+          <div>
+            <div className="bg-white">{pokeCard.name}</div>
+            <img src={pokeCard.url}></img>
+          </div>
         ))}
       </div>
     </div>
