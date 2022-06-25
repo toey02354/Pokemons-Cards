@@ -67,13 +67,14 @@ const Home = () => {
 
   useEffect(() => {
     getPokemonsById();
+    SortThemByID();
   }, [newCardsIndex]);
 
   useEffect(() => {
     console.log(sortById);
     // console.log(pokemons);
     SortThemByID();
-  }, [sortById]);
+  }, [sortById, pokemons]);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-between gap-8 p-[3rem] bg-[#F6F6F7]">
@@ -131,6 +132,7 @@ const Home = () => {
           disabled={newCardsIndex <= 0}
           className={`BTN-FOOTER`}
           onClick={() => {
+            setSortById(true);
             setNewCardsindex((curr) => curr - 12);
           }}
         >
@@ -139,6 +141,7 @@ const Home = () => {
         <button
           className={`BTN-FOOTER`}
           onClick={() => {
+            setSortById(true);
             setNewCardsindex((curr) => curr + 12);
           }}
         >
