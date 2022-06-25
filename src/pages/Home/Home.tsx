@@ -9,21 +9,41 @@ interface Pokemons {
 
 const Home = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [newCardsIndex, setNewCardsindex] = useState(0);
   const [pokemons, setPokemon] = useState<Pokemons[]>([
     { id: 0, name: "", url: "" },
   ]);
 
-  const getPokemonsById = async () => {
+  const getPokemonsById = async (
+    cardsindex: number = 1,
+    moreCards: number = newCardsIndex
+  ) => {
     setLoading(true);
     let newPoke: Pokemons[] = [];
-    for (let i = 1; i < 13; i++) {
+    // for (let i = 1; i < 13; i++) {
+    //   await axios
+    //     .get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       //   setPokemon(res.data.results);
+    //       newPoke[i] = {
+    //         id: i - 1,
+    //         name: res.data.name,
+    //         url: res.data.sprites.front_default,
+    //       };
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
+    while (cardsindex + moreCards < 13 + moreCards) {
       await axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+        .get(`https://pokeapi.co/api/v2/pokemon/${cardsindex + moreCards}`)
         .then((res) => {
           console.log(res.data);
           //   setPokemon(res.data.results);
-          newPoke[i] = {
-            id: i - 1,
+          newPoke[cardsindex] = {
+            id: cardsindex + moreCards - 1,
             name: res.data.name,
             url: res.data.sprites.front_default,
           };
@@ -31,6 +51,7 @@ const Home = () => {
         .catch((err) => {
           console.log(err);
         });
+      cardsindex++;
     }
     setPokemon(newPoke);
     setLoading(false);
@@ -38,9 +59,7 @@ const Home = () => {
 
   useEffect(() => {
     getPokemonsById();
-  }, []);
-
-  const pokemonCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  }, [newCardsIndex]);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-between gap-8 p-8 bg-[#F6F6F7]">
@@ -76,8 +95,23 @@ const Home = () => {
         </div>
       </div>
       <div className="flex justify-between">
-        <button className="BTN-FOOTER">Previous 12</button>
-        <button className="BTN-FOOTER">Next 12</button>
+        <button
+          disabled={newCardsIndex <= 0}
+          className={`BTN-FOOTER`}
+          onClick={() => {
+            setNewCardsindex((curr) => curr - 12);
+          }}
+        >
+          Previous 12
+        </button>
+        <button
+          className={`BTN-FOOTER`}
+          onClick={() => {
+            setNewCardsindex((curr) => curr + 12);
+          }}
+        >
+          Next 12
+        </button>
       </div>
     </div>
   );
